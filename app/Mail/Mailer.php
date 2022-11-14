@@ -29,7 +29,7 @@ class Mailer extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from miltonmilk.com')
+        return $this->subject('Mail from affinito.com')
                     ->view('email.confirmation');
     }
 }

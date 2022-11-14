@@ -73,11 +73,11 @@
                             </ul>
                         </div>
                         <div class="call-support">
-                            <p><a href="tel:919879676665">+91 9879676665</a></p>
+                            <p><a href="tel:917069969299">+91 7069969299</a></p>
                         </div>
                         <div class="offcanvas_footer">
                                                     
-                            <span><a href="mailto:gaurav@miltonmilk.com"><i class="fa fa-envelope-o"></i> gaurav@miltonmilk.com</a></span>
+                            <span><a href="mailto:nutriquickfoods@gmail.com"><i class="fa fa-envelope-o"></i> nutriquickfoods@gmail.com</a></span>
                         </div>
                     </div>
                 </div>

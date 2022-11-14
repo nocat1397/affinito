@@ -173,7 +173,7 @@ export default {
                         // "key": "rzp_test_s7RstDro0RRmJj", // Enter the Key ID generated from the Dashboard
                         "amount": response.data.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                         "currency": "INR",
-                        "name": "Milton Milk",
+                        "name": "Affinito",
                         "order_id": response.data.rzp_order_id,
                         "handler": function(payResponse){
                             // this.paymentDetails = response;
