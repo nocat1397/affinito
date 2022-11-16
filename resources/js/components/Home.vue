@@ -67,7 +67,7 @@
                     <div class="product_header">
                         <div class="section_title">
                            <p>Explore our store</p>
-                           <h2>{{tag.name}} Products</h2>
+                           <!-- <h2>{{tag.name}} Products</h2> -->
                         </div>
                         
                     </div>
