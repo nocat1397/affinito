@@ -60,7 +60,7 @@
 
     
     <!--product area start-->
-    <div class="product_area color_two  mb-60" v-for="tag in tags" :key="tag.id" id="products">
+        <div class="product_area color_two  mb-60"  id="products">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -75,14 +75,14 @@
             </div> 
             <div class="product_container">  
                <div class="row">
-                   <div class="col-12">
+                   <!-- <div class="col-12">
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="plant1" role="tabpanel">
+                            <div class="tab-pane fade show active" id="plant1" role="tabpanel"> -->
                                
-                                <div v-if="filteredList.length > 0">
-                                <carousel class="product_carousel product_column5 d-md-block d-lg-block d-none" :responsive="{0:{items:2,nav:false,loop:false,margin:20,dots:false},600:{items:5,nav:false,margin:20,loop:false,dots:false}}">
+                                <!-- <div v-if="filteredList.length > 0"> -->
+                                <!-- <carousel class="product_carousel product_column5 d-md-block d-lg-block d-none" :responsive="{0:{items:2,nav:false,loop:false,margin:20,dots:false},600:{items:5,nav:false,margin:20,loop:false,dots:false}}"> -->
 
-                                    <article v-for="product in filteredList" :key="product" v-if="product.tag_id == tag.id">
+                                    <article class="col-md-4 product_carousel product_column5" v-for="product in filteredList" :key="product">
                                         <figure class="single_product">
                                             <div class="product_thumb"> 
                                                 <router-link  class="primary_img" :to="{name: 'Product-Details', params: { name: product.name}}"><img :src="'/images/'+product.images[0].file" alt=""></router-link>
@@ -129,16 +129,15 @@
                                     
 
                                     
-                                </carousel> 
-                                <carousel class="product_carousel product_column5 d-block d-md-none d-lg-none" :responsive="{0:{items:2,nav:false,loop:false,margin:20,dots:false},600:{items:5,nav:false,margin:20,loop:false,dots:false}}">
+                                <!-- </carousel>  -->
+                                <!-- <carousel class="product_carousel product_column5 d-block d-md-none d-lg-none" :responsive="{0:{items:2,nav:false,loop:false,margin:20,dots:false},600:{items:5,nav:false,margin:20,loop:false,dots:false}}"> -->
 
-                                    <article v-for="product in filteredList" :key="product" v-if="product.tag_id == tag.id">
+                                    <!-- <article class="col-md-4 product_carousel product_column5" v-for="product in filteredList" :key="product">
                                         <figure class="single_product">
                                             <div class="product_thumb"> 
                                                 <div  class="primary_img"><img :src="'/images/'+product.images[0].file" alt=""></div>
                                                 <div class="label_product">
-                                                    <!-- <span class="label_sale">Sale</span> -->
-                                                    <!-- <span class="label_new">New</span> -->
+                                                  
                                                 </div>
                                                 <div class="" v-if="product.quantity < 6" style="background: red; color:#fff">
                                                     <p class="text-center">Out of Stock</p>
@@ -153,7 +152,7 @@
                                             </div>
                                             <figcaption class="product_content">
                                                 <h4 class="product_name"><router-link :to="{name: 'Product-Details', params: { name: product.name}}">{{product.name.replace(/-/g," ")}}</router-link></h4>
-                                                <!-- <p><router-link to="#">Fruits</router-link></p> -->
+                                               
                                                 <div class="price_box"> 
                                                     <span class="current_price">₹ {{product.amount}}/-</span>
                                                 </div>
@@ -175,19 +174,20 @@
                                                     </div>
                                             </figcaption>
                                         </figure>
-                                    </article>
+                                    </article> -->
                                     
 
                                     
-                                </carousel> 
-                                </div> 
-                            </div>
+                                <!-- </carousel>  -->
+                                <!-- </div>  -->
+                            <!-- </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>        
             </div>   
         </div> 
     </div>
+   
     <!--product area end-->
 
     <!--banner area start-->
@@ -323,7 +323,7 @@ export default {
             show:true,
             quantity:1,
             qty:{},
-            tags:[]
+           
         }
     },
      mounted() {
@@ -358,7 +358,7 @@ export default {
     created() {
         this.fetchProducts(),
         this.fetchUser()
-        this.fetchTags()
+        // this.fetchTags()
     },
     methods: {
 
@@ -368,12 +368,12 @@ export default {
 
                 });
         },
-        fetchTags:function(){
-            this.axios.get('api/tags').then(response => {
-                  this.tags = response.data;
-                    console.log(response.data);
-                });
-        },
+        // fetchTags:function(){
+        //     this.axios.get('api/tags').then(response => {
+        //           this.tags = response.data;
+        //             console.log(response.data);
+        //         });
+        // },
         fetchUser:function() {
             this.axios.get('/user').then(response => {
               this.userDetails = response.data;

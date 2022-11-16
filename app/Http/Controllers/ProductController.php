@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
+// use App\Tag;
 use App\Image;
 use App\Product;
 use Illuminate\Http\Request;
@@ -19,8 +19,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        $tags = Tag::all();
-        return view('admin.product.showProducts',compact('products','tags'));
+        // $tags = Tag::all();
+        return view('admin.product.showProducts',compact('products'));
     }
 
     /**
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $product->quantity_unit = $request->quantity_unit;
         $product->amount = $request->amount;
         $product->amount_unit = $request->amount_unit;
-        $product->tag_id = $request->tag;
+        // $product->tag_id = $request->tag;
         $product->save();
 
      
@@ -123,7 +123,7 @@ class ProductController extends Controller
         // );
 
         $product = Product::find($request->product_id);
-        $product->update(['name'=>$request->name, 'description'=>$request->description, 'quantity'=>$request->quantity, 'quantity_unit'=>$request->quantity_unit, 'amount'=>$request->amount, 'amount_unit'=>$request->amount_unit, 'tag_id'=>$request->tag_id]);
+        $product->update(['name'=>$request->name, 'description'=>$request->description, 'quantity'=>$request->quantity, 'quantity_unit'=>$request->quantity_unit, 'amount'=>$request->amount, 'amount_unit'=>$request->amount_unit]);
         $product->save();
         if ($files=$request->file('file')) {
             foreach ($files as $file)

@@ -94,7 +94,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="form-group mt-3">
+                      {{--  <div class="form-group mt-3">
                         <label>Tags</label>
                         <select class="form-control" name="tag">
                           <option value="">--Select Tag--</option>
@@ -102,7 +102,7 @@
                             <option value="{{$tag->id}}">{{$tag->name}}</option>
                           @endforeach
                         </select>
-                      </div>
+                      </div>  --}}
                         <div class="form-group mt-3">
 
                           {!! Form::label('file', 'Upload Product Image') !!}

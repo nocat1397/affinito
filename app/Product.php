@@ -14,9 +14,9 @@ class Product extends Model
     public function carts() {
         return $this->hasMany('App\Cart');
     }
-    public function tag() {
-        return $this->belongsTo('App\Tag');
-    }
+    // public function tag() {
+    //     return $this->belongsTo('App\Tag');
+    // }
     public function whishlists() {
         return $this->hasMany('App\Whishlist');
     }

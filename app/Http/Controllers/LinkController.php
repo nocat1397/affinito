@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
+// use App\Tag;
 use App\Enquiry;
 use Illuminate\Http\Request;
 
@@ -10,8 +10,8 @@ class LinkController extends Controller
 {
     public function addProduct() {
 
-        $tags = Tag::all();
-        return view('admin.product.addProduct', compact('tags'));
+        // $tags = Tag::all();
+        return view('admin.product.addProduct');
     
     }
     public function addEnquiry(Request $request) {
@@ -29,9 +29,9 @@ class LinkController extends Controller
         $enquiries = Enquiry::all();
         return view('admin.enquiry.showEnquiries', compact('enquiries'));
     }
-    public function allTags()
-    {
-        $tags = Tag::all();
-        return response($tags);
-    }
+    // public function allTags()
+    // {
+    //     $tags = Tag::all();
+    //     return response($tags);
+    // }
 }

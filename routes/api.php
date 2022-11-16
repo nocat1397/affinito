@@ -39,4 +39,4 @@ Route::get('/show-wallet/{id}', 'WalletController@index');
 Route::post('/addWallet', 'WalletController@store');
 Route::post('/makePayment', 'WalletController@payment');
 Route::get('/showTransactions/{id}', 'TransactionController@index');
-Route::get('/tags' ,'LinkController@allTags');
+// Route::get('/tags' ,'LinkController@allTags');
