@@ -54,9 +54,9 @@
                                 <li class="menu-item-has-children">
                                     <router-link to="/">Home</router-link>
                                 </li>
-                                <li class="menu-item-has-children" v-if="userDetails">        
+                                <!-- <li class="menu-item-has-children" v-if="userDetails">        
                                     <router-link :to="{name: 'wallet', params: { id: userDetails.id}}">Wallet</router-link>
-                                </li>
+                                </li> -->
                                 <li class="menu-item-has-children" v-if="userDetails">        
                                     <router-link :to="{name: 'orders', params: { id: userDetails.id}}">Your Orders</router-link>
                                 </li>
@@ -145,7 +145,7 @@
                                             <router-link to="/" style="line-height: unset">{{userDetails.name}}<i class="fa fa-angle-down"></i></router-link>
                                             <ul class="sub_menu">
                                                 <li style="display: block!important"><router-link :to="{name: 'orders', params: { id: userDetails.id}}" class="text-dark">Your Orders</router-link></li>
-                                                <li style="display: block!important"><router-link :to="{name: 'wallet', params: { id: userDetails.id}}" class="text-dark">Wallet</router-link></li>
+                                                <!-- <li style="display: block!important"><router-link :to="{name: 'wallet', params: { id: userDetails.id}}" class="text-dark">Wallet</router-link></li> -->
                                                 <li style="display: block!important"><a  @click.prevent="logout" class="text-dark">Logout</a></li>
                                             </ul>
                                         </li>
@@ -351,13 +351,13 @@
             </div>
         </div>  
          <!-- <footer class="footer-bottom fixed-bottom d-md-none d-lg-none" v-if="carts.length !== 0" id="showPlaceorder"> -->
-         <footer class="footer-bottom fixed-bottom d-md-none d-lg-none" id="showPlaceorder" v-on:click="checkCart();">
+         <!-- <footer class="footer-bottom fixed-bottom d-md-none d-lg-none" id="showPlaceorder" v-on:click="checkCart();">
            
               <a class="btn btn-success btn-sm shadow" style="width: 100%;height: 45px;font-size: 18px;padding-top: 8px;"><img src="/img/icon/order.png" height="20" width="20"> Place Your Order
             
               </a>
            
-        </footer> 
+        </footer>  -->
     </footer>
     <!--footer area end-->
    <!--Payment create Modal -->
@@ -560,6 +560,11 @@ export default {
 
             }
             
+        },
+        mounted: function () {
+          window.setInterval(() => {
+            this.fetchUser()
+          }, 3000)
         }
 }
 </script>

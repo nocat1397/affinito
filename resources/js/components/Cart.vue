@@ -93,7 +93,7 @@
                                        <p class="cart_amount">₹ {{total}}.00</p>
                                    </div>
                                    <div class="checkout_btn">
-                                       <button type="submit" v-on:click="buyNow()" v-if="carts.length !== 0">Place Order</button>
+                                       <button type="button" v-on:click="buyNow()" v-if="carts.length !== 0">Place Order</button>
                                        <router-link to="/" v-if="carts.length == 0" class="disabled">Place Order</router-link>
                                    </div>
                                    
@@ -255,17 +255,24 @@ export default {
             });
         },
         buyNow(){
-            var user = this.user;
+            var user = this.userDetails;
             var userId = this.$route.params.id;
             var xhr = this.axios;
             var swal = this.$fire;
             var router = this.$router;
+            var carts = this.carts;
+            this.amount = this.carts.reduce(function(amount, item){
+                return amount + (item.quantity * item.product.amount)
+            },0);
+            // console.log(this.amount);
+            // return false;
             this.axios
-                .post('/api/addWallet', {user_id:userId, amount:this.wallet.amount})
+                .post('/api/makeOrder', {user_id:userId, amount:this.amount})
                 .then((response) => {
+                    // console.log(response.data);
+                    // return false;
                      var options = {
-                        "key": "rzp_live_jsM1RA5E4QnfP6", // Enter the Key ID generated from the Dashboard
-                        // "key": "rzp_test_s7RstDro0RRmJj", // Enter the Key ID generated from the Dashboard
+                        "key": "rzp_test_9uk4RAnoDI1zfQ", // Enter the Key ID generated from the Dashboard
                         "amount": response.data.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                         "currency": "INR",
                         "name": "Affinito",
@@ -273,11 +280,12 @@ export default {
                         "handler": function(payResponse){
                             // this.paymentDetails = response;
                             xhr
-                            .post('/api/makePayment',{payResponse, amount:response.data.amount, id:response.data.id, user_id:userId})
+                            .post('/api/makePayment',{carts, payResponse, amount:response.data.amount, id:response.data.id, user_id:userId})
                             .then((response) => {
                                 // console.log(response);
                                 swal({
-                                  title: "Money Successfully Added to the Wallet",
+                                  title: "Payment Successfull",
+                                  text: "Your Order_ID is "+response.data.rzp_order_id,
                                   type: "success",  
                                   timer: 3000,
                                   showCancelButton: false,

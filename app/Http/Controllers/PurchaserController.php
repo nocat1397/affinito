@@ -146,28 +146,77 @@ class PurchaserController extends Controller
     {
         //
     }
+
     public function makeOrder(Request $request)
     {
         // return response($request);
         // exit;
-        $order = new Order;
-        $order->user_id = $request->user_id;
-        $order->amount = $request->amount;
-        $order->save();
+        $trans = new Transaction;
+        $trans->user_id = $request->user_id;
+        $trans->amount = $request->amount;
+        $trans->save();
 
-        $api = new Api('rzp_live_jsM1RA5E4QnfP6', 'g1Hh46JHyebUS9UWqLt00qp6');
+        $api = new Api('rzp_test_9uk4RAnoDI1zfQ', '8nbDPTP9eQMI8ULAIwFSzpgz');
         $rzpOrder = $api->order->create(array(
-            'receipt' => 'rcpt_user'.$request->user_id.'_order'.$order->id,
-            'amount' => $order->amount*100,
+            'receipt' => 'rcpt_user'.$request->user_id.'_order'.$trans->id,
+            'amount' => $trans->amount*100,
             'currency' => 'INR'
             )
         );
         $order_id = $rzpOrder['id'];
 
-        $updateOrder = Order::find($order->id);
-        $updateOrder->update(['rzp_order_id'=>$order_id,'orderstatus_id'=>1]);
+        $updateOrder = Transaction::find($trans->id);
+        $updateOrder->update(['rzp_order_id'=>$order_id]);
         $updateOrder->save();
 
         return response($updateOrder);
     }
+
+    public function payment(Request $request)
+    {
+
+        $input = $request;
+        $api = new Api('rzp_test_9uk4RAnoDI1zfQ', '8nbDPTP9eQMI8ULAIwFSzpgz');
+
+        $payment = $api->payment->fetch($input->payResponse['razorpay_payment_id']);
+
+        $order = new Order;
+        $order->user_id = $request->user_id;
+        $order->amount = $request->amount;
+        $order->orderstatus_id = 1;
+        $order->save();
+        
+        $trans = Transaction::find($request->id);
+        $trans->update(['rzp_payment_id'=>$request->payResponse['razorpay_payment_id'], 'payment_mode'=>$payment['method'], 'order_id' => $order->id]);
+        $trans->save();
+
+        foreach($request->carts as $cart) 
+        {
+            
+            $purchaser = new Purchaser;
+            $purchaser->product_id = $cart['product_id'];
+            $purchaser->quantity = $cart['quantity'];
+            $purchaser->order_id = $order->id;
+            $purchaser->user_id = $cart['user_id'];
+            $purchaser->save();
+            
+            $product = Product::find($cart['product_id']);
+            $product->update(['quantity' => $product->quantity - $cart['quantity']]);
+            $product->save();
+            
+            
+            $deleteCart = Cart::find($cart['id']);
+            $deleteCart->delete();
+            
+        }
+        
+        // $user = User::find($request->user_id);
+        // $total = ($user->wallet->amount + $request->amount);
+        // $user->wallet->update(['amount'=>$total]);
+        // $user->save();
+        
+        // $payment->capture(array('amount' => $request->amount, 'currency' => 'INR'));
+        return response($trans);
+    }
+
 }
