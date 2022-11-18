@@ -93,7 +93,7 @@
                                        <p class="cart_amount">₹ {{total}}.00</p>
                                    </div>
                                    <div class="checkout_btn">
-                                       <button type="button" data-toggle="modal" data-target="#orderConfirmation" v-if="carts.length !== 0">Place Order</button>
+                                       <button type="submit" v-on:click="buyNow()" v-if="carts.length !== 0">Place Order</button>
                                        <router-link to="/" v-if="carts.length == 0" class="disabled">Place Order</router-link>
                                    </div>
                                    
@@ -253,6 +253,53 @@ export default {
               window.location.reload();
               console.log(response.data)
             });
+        },
+        buyNow(){
+            var user = this.user;
+            var userId = this.$route.params.id;
+            var xhr = this.axios;
+            var swal = this.$fire;
+            var router = this.$router;
+            this.axios
+                .post('/api/addWallet', {user_id:userId, amount:this.wallet.amount})
+                .then((response) => {
+                     var options = {
+                        "key": "rzp_live_jsM1RA5E4QnfP6", // Enter the Key ID generated from the Dashboard
+                        // "key": "rzp_test_s7RstDro0RRmJj", // Enter the Key ID generated from the Dashboard
+                        "amount": response.data.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": "Affinito",
+                        "order_id": response.data.rzp_order_id,
+                        "handler": function(payResponse){
+                            // this.paymentDetails = response;
+                            xhr
+                            .post('/api/makePayment',{payResponse, amount:response.data.amount, id:response.data.id, user_id:userId})
+                            .then((response) => {
+                                // console.log(response);
+                                swal({
+                                  title: "Money Successfully Added to the Wallet",
+                                  type: "success",  
+                                  timer: 3000,
+                                  showCancelButton: false,
+                                  showConfirmButton: false
+                                });
+                                router.go();
+                            });
+                        //    return response;
+                        },
+                        "prefill": {
+	                    	"name": user.name, // pass customer name
+	                    	"email": user.email,// customer email
+	                    	"contact": user.mobile //customer phone no.
+	                    },
+                        "theme": {
+                            "color": "#f7971e"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                        rzp1.open();
+                
+                });
         },
         createOrder(payment_mode) {
             var xhr = this.axios;
