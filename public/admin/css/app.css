@@ -19080,6 +19080,10 @@ html.maximized-card {
   margin-bottom: 20px;
   position: relative;
 }
+.small-box:hover{
+  box-shadow: 0px 5px 8px 0px rgb(108 117 125 / 98%);
+  transition: all 0.3s ease-out 0s;
+}
 
 .small-box > .inner {
   padding: 10px;
@@ -46720,3 +46724,110 @@ a.text-dark:focus {
   }
 }
 
+
+
+
+.c-dashboardInfo {
+  margin-bottom: 15px;
+}
+.c-dashboardInfo .wrap {
+  background: #ffffff;
+  box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 25px 20px;
+  height: 100%;
+}
+.c-dashboardInfo .wrap:hover{
+  box-shadow: 0px 5px 8px 0px rgb(108 117 125 / 98%);
+  transition: all 0.3s ease-in 0s;
+}
+.c-dashboardInfo__title,
+.c-dashboardInfo__subInfo {
+  color: #6c6c6c;
+  font-size: 21px;
+  font-weight: 600;
+}
+.c-dashboardInfo span {
+  display: block;
+}
+.c-dashboardInfo__count {
+  font-weight: 600;
+  font-size: 2.5em;
+  line-height: 64px;
+  color: #323c43;
+}
+.c-dashboardInfo .wrap:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  content: "";
+}
+
+.c-dashboardInfo:nth-child(1) .wrap:after {
+  background: linear-gradient(69.83deg, #222222 0%, #c02626 100%);
+}
+.c-dashboardInfo:nth-child(2) .wrap:after {
+  background: linear-gradient(81.67deg, #222222 0%, #c02626 100%);
+}
+.c-dashboardInfo:nth-child(3) .wrap:after {
+  background: linear-gradient(69.83deg, #222222 0%, #c02626 100%);
+}
+.c-dashboardInfo:nth-child(4) .wrap:after {
+  background: linear-gradient(81.67deg, #222222 0%, #c02626 100%);
+}
+.c-dashboardInfo:nth-child(5) .wrap:after {
+  background: linear-gradient(81.67deg, #222222 0%, #c02626 100%);
+}
+.c-dashboardInfo:nth-child(6) .wrap:after {
+  background: linear-gradient(81.67deg, #222222 0%, #c02626 100%);
+}
+.c-dashboardInfo__title svg {
+  color: #d7d7d7;
+  margin-left: 5px;
+}
+.MuiSvgIcon-root-19 {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 24px;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.c-dashboardInfo .icon {
+  color: rgba(0, 0, 0, 0.15);
+  z-index: 0;
+}
+
+.c-dashboardInfo .icon > i {
+  font-size: 90px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  transition: all 0.3s linear;
+}
+
+.c-dashboardInfo .icon > i.fa, .c-dashboardInfo .icon > i.fas, .c-dashboardInfo .icon > i.far, .c-dashboardInfo .icon > i.fab, .c-dashboardInfo .icon > i.glyphicon, .c-dashboardInfo .icon > i.ion {
+  font-size: 70px;
+  top: 65px;
+}
+
+.c-dashboardInfo:hover {
+  text-decoration: none;
+}
+
+.c-dashboardInfo:hover .icon > i {
+  font-size: 95px;
+}
+
+.c-dashboardInfo:hover .icon > i.fa, .c-dashboardInfo:hover .icon > i.fas, .c-dashboardInfo:hover .icon > i.far, .c-dashboardInfo:hover .icon > i.fab, .c-dashboardInfo:hover .icon > i.glyphicon, .c-dashboardInfo:hover .icon > i.ion {
+  font-size: 75px;
+}

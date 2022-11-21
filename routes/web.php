@@ -69,10 +69,10 @@ Route::domain(env('SUB_DOMAIN'))->group(function () {
             Auth::logout();
             return redirect('/home');
         });
+        Route::get('/home', 'HomeController@index')->name('home');
         Route::get('{any}', function () {
             return view('home');
         })->middleware('auth')->where('any', '.*');
-        Route::get('/home', 'HomeController@index')->name('home');
         
         
     });    

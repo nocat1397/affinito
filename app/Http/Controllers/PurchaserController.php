@@ -183,6 +183,7 @@ class PurchaserController extends Controller
         $order = new Order;
         $order->user_id = $request->user_id;
         $order->amount = $request->amount;
+        $order->rzp_payment_id = $request->payResponse['razorpay_payment_id'];
         $order->orderstatus_id = 1;
         $order->save();
         

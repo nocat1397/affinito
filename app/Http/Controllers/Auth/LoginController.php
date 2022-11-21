@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,7 @@ class LoginController extends Controller
             return redirect(env('DOMAIN'));
         }
         if (Auth::user()->role->name == "Admin"){
+
             return redirect('/home');
         } 
     }
