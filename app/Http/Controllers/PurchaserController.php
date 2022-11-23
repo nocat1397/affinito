@@ -156,7 +156,7 @@ class PurchaserController extends Controller
         $trans->amount = $request->amount;
         $trans->save();
 
-        $api = new Api('rzp_test_9uk4RAnoDI1zfQ', '8nbDPTP9eQMI8ULAIwFSzpgz');
+        $api = new Api('rzp_live_NWxi0Wz3mCa9n0', '3TqGUZwwW0pScrpG9St4b9cT');
         $rzpOrder = $api->order->create(array(
             'receipt' => 'rcpt_user'.$request->user_id.'_order'.$trans->id,
             'amount' => $trans->amount*100,
@@ -176,7 +176,7 @@ class PurchaserController extends Controller
     {
 
         $input = $request;
-        $api = new Api('rzp_test_9uk4RAnoDI1zfQ', '8nbDPTP9eQMI8ULAIwFSzpgz');
+        $api = new Api('rzp_live_NWxi0Wz3mCa9n0', '3TqGUZwwW0pScrpG9St4b9cT');
 
         $payment = $api->payment->fetch($input->payResponse['razorpay_payment_id']);
 
