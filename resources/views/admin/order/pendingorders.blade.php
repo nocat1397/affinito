@@ -19,7 +19,7 @@
           transition: .5s ease;
           backface-visibility: hidden;
           padding: 2px;
-        }
+        } 
         .middle {
           transition: .5s ease;
           opacity: 0;
