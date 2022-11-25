@@ -24,7 +24,7 @@ class WalletController extends Controller
         $wallet->amount = $request->amount;
         $wallet->save();
 
-        $api = new Api('rzp_live_jsM1RA5E4QnfP6', 'g1Hh46JHyebUS9UWqLt00qp6');
+        $api = new Api('rzp_test_o1YjA8iVqHkx4v', 'dyqLSDFyZ8L73qZ4db2jZVZG');
         // $api = new Api('rzp_test_s7RstDro0RRmJj', 'yiGVZ0jOPMe0nz3jMMyeh9Ue');
         $rzpOrder = $api->order->create(array(
             'receipt' => 'rcpt_user'.$request->user_id.'_order'.$wallet->id,
@@ -45,7 +45,7 @@ class WalletController extends Controller
     {
 
         $input = $request;
-        $api = new Api('rzp_live_jsM1RA5E4QnfP6', 'g1Hh46JHyebUS9UWqLt00qp6');
+        $api = new Api('rzp_test_o1YjA8iVqHkx4v', 'dyqLSDFyZ8L73qZ4db2jZVZG');
         // $api = new Api('rzp_test_s7RstDro0RRmJj', 'yiGVZ0jOPMe0nz3jMMyeh9Ue');
         $payment = $api->payment->fetch($input->payResponse['razorpay_payment_id']);
         

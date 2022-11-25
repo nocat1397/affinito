@@ -35,7 +35,7 @@ export default {
                         this.total = this.carts.reduce(function(total, item){
                            
                         var options = {
-                            "key": "rzp_live_NWxi0Wz3mCa9n0", // Enter the Key ID generated from the Dashboard
+                            "key": "rzp_test_o1YjA8iVqHkx4v", // Enter the Key ID generated from the Dashboard
                             "amount": (total + (item.quantity * item.product.amount))*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                             "currency": "INR",
                             "name": "Affinito",
