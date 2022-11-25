@@ -7,7 +7,7 @@
         #data-success, #data-error {
             display: none;
         }
-        .img-container {
+        .img-container {    
           position: relative;
           width: 20%;
           display: inline-block;
@@ -19,7 +19,7 @@
           transition: .5s ease;
           backface-visibility: hidden;
           padding: 2px;
-        }
+        } 
         .middle {
           transition: .5s ease;
           opacity: 0;
