@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
     public function pending() {
         $orders = Order::where('orderstatus_id', 1)->get()->reverse();
-        return view('admin.order.pendingOrders', compact('orders'));
+        return view('admin.order.pendingorders', compact('orders'));
     }
     public function accepted() {
         $orders = Order::where('orderstatus_id', 2)->get()->reverse();

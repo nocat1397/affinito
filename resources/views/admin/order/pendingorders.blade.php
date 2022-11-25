@@ -7,7 +7,7 @@
         #data-success, #data-error {
             display: none;
         }
-        .img-container {
+        .img-container {    
           position: relative;
           width: 20%;
           display: inline-block;
