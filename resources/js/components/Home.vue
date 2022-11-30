@@ -19,6 +19,7 @@
                 </div> -->
             </div>
             <div class="single_slider d-flex align-items-center" style="background-image: url('/img/bg/2.jpg')"></div>
+            <div class="single_slider d-flex align-items-center" style="background-image: url('/img/bg/3.jpg')"></div>
         </carousel>
     </section>
     <!--slider area end-->
