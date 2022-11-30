@@ -4,19 +4,9 @@
     
     <!--slider area start-->
     <section class="slider_section color_two mb-70">
-        <carousel class="slider_area" :responsive="{0:{items:1,nav:false,loop:true,dots:false},600:{items:1,nav:false,loop:true,dots:false}}">
+        <carousel class="slider_area" :responsive="{0:{items:1,autoplay:true,nav:false,loop:true,dots:false},600:{items:1,autoplay:true,nav:false,loop:true,dots:false}}">
             <div class="single_slider d-flex align-items-center" style="background-image: url('/img/bg/1.jpg')">
-                <!-- <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="slider_content">
-                                <h1>Fresh Milk Products</h1>
-                             
-                                <router-link to="/" v-scroll-to="{element:'#products'}">Explore </router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                
             </div>
             <div class="single_slider d-flex align-items-center" style="background-image: url('/img/bg/2.jpg')"></div>
             <div class="single_slider d-flex align-items-center" style="background-image: url('/img/bg/3.jpg')"></div>
