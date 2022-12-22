@@ -35,10 +35,10 @@
                 <div class="col-lg-6 col-md-6">
                    <div class="contact_message content">
                         <h3>contact us</h3>    
-                         <p class="footer_desc"><span class="text-uppercase bg-orange p-1 text-white">Affinito organic products private limited</span><br>Namaste! We are Organic products supplier.</p>
+                         <p class="footer_desc"><span class="text-uppercase bg-orange p-1 text-white">NutriQuick Foods</span><br>Namaste! We are Organic products supplier.</p>
                         <ul>
                             <li><i class="fa fa-fax"></i>  Address : 1803/4, VU Nagar, Phase -IV, GIDC Estate, Anand, Gujarat 388121.</li>
-                            <li><i class="fa fa-phone"></i><a href="tel:917069969299">+91 7069969299</a></li>
+                            <li><i class="fa fa-phone"></i><a href="tel:8877224416">+91 8877224416,+91 9537886644,+91 9624365544</a></li>
                             <li><i class="fa fa-envelope-o"></i><a href="mailto:nutriquickfoods@gmail.com">nutriquickfoods@gmail.com</a></li>
                         </ul>             
                     </div> 
