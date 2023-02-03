@@ -62,14 +62,10 @@
                                 <button class="button" type="button" v-if="userDetails && product.quantity < 6">Out Of Stock</button>  
                                 <button class="button" type="button" v-if="userDetails && product.quantity > 6" v-on:click="addToCart(product.id,quantity)">add to cart</button>  
                             </div>
-                            <div>
+                            <div v-if="product.features !== null && product.features.length > 0">
                                 <h4 class="bg-orange pt-2 pb-2 pl-1 text-white shadow"> Description</h4>
                                 <ul style="list-style: inside">
-                                <li>100% Original Products</li>
-                                <li>Free Delivery may be available in offer period</li>
-                                <li>Pay on delivery might be available</li>
-                                <li>Easy 5 days returns and exchanges</li>
-                                <li>return of amount can take 8-10 working days</li> 
+                                    <li v-for="feature in product.features" :key="feature">{{feature}}</li> 
                                 </ul>
                             </div>
                         </form>
@@ -192,7 +188,7 @@ export default {
         });
         setTimeout(() => {
           this.show = false
-        }, 2000);
+        }, 500);
         $("#zoom_03").elevateZoom({
 	gallery:'gallery_01',
 	cursor: 'pointer',

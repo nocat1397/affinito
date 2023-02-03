@@ -58,10 +58,18 @@
 		            	</div>
 		            @endif
                 {!! Form::open(['method'=>'post','action'=>'ProductController@store','files'=>true]) !!}
-        
+                <div class="form-group">
+                  <label>Choose Category</label>
+                  <select class="form-control" name="category_id" id="categories">
+                    <option value="">--Select Category--</option>
+                    @foreach ($categories as $category)  
+                      <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
                     <div class="form-group">
                         {!! Form::label('name', 'Name') !!}
-                        {!! Form::text('name', null, ['class'=>'form-control text-capitalize', 'placeholder'=>'Enter Product Name']) !!}
+                        {!! Form::text('name', null, ['class'=>'form-control text-capitalize mb-2', 'placeholder'=>'Enter Product Name']) !!}
                         {!! Form::label('desc', 'Description') !!}
                         {!! Form::textarea('description', null, ['class'=>'form-control text-capitalize', 'placeholder'=>'Enter product description', 'rows' => '3']) !!}
                       </div>
@@ -111,6 +119,17 @@
                         </div>
                        
                         <hr>
+                      <label for="">Features</label>
+                      <div id="features" class="form-group">
+                        <div class="form-group">
+                          <input type="text" name="features[]" class="form-control" placeholder="Type features or specifications">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <a type="button" class="text-white btn btn-danger btn-sm shadow" id="removeFeature">Delete</a>
+                        <a type="button" class="text-white btn btn-success btn-sm shadow float-right" id="addFeature">Add</a>
+                      </div>
+                      <hr>
                     <div class="form-group text-center">
                         {!! Form::submit('Submit', ['class'=>'btn btn-dark']) !!}
                     </div>    
@@ -175,6 +194,14 @@
       $('#amnt').empty();
       $('#amnt').append('<option value="'+e.target.value+'">/ '+e.target.value+'</option>');
     });
+</script>
+<script>
+  $('#addFeature').click(function(){
+    $('#features').append('<div class="form-group"><input type="text" name="features[]" class="form-control" placeholder="Type features or specifications"></div>');
+  });
+  $('#removeFeature').click(function(){
+    $('#features').children().last().remove();
+  });
 </script>
 </body>
 </html>

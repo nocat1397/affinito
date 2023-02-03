@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/banners', 'ImageController@index');
 Route::get('/products', 'ProductController@front');
 Route::get('/searchProducts/{name}', 'ProductController@searchProduct');
 Route::get('/images', 'ImageController@cart');
@@ -37,6 +38,8 @@ Route::post('/addNewsletter', 'NewsletterController@store');
 Route::post('/orderCancel', 'OrderController@orderCancel');
 Route::post('/addEnquiry', 'LinkController@addEnquiry');
 Route::get('/show-wallet/{id}', 'WalletController@index');
+Route::post('/categories', 'CategoryController@front');
+Route::get('/category', 'CategoryController@index');
 // Route::post('/addWallet', 'WalletController@store');
 // Route::post('/makePayment', 'WalletController@payment');
 Route::get('/showTransactions/{id}', 'TransactionController@index');

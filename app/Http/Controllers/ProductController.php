@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use App\Tag;
 use App\Image;
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\UploadImageRequest;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,8 @@ class ProductController extends Controller
     {
         $products = Product::all();
         // $tags = Tag::all();
-        return view('admin.product.showProducts',compact('products'));
+        $categories = Category::all();
+        return view('admin.product.showProducts',compact('products','categories'));
     }
 
     /**
@@ -41,6 +43,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $this->validate($request, [
             'file' => 'required',
             'file.*' => 'image|max:70|dimensions:width=300,height=300'
@@ -51,8 +54,10 @@ class ProductController extends Controller
         ]);
 
         $product = new Product;
+        $product->category_id = $request->category_id;
         $product->name = str_replace(' ', '-', $request->name);
         $product->description = $request->description;
+        $product->features = $request->features;
         $product->quantity = $request->quantity;
         $product->quantity_unit = $request->quantity_unit;
         $product->amount = $request->amount;
@@ -121,9 +126,12 @@ class ProductController extends Controller
         // ]    
 
         // );
+        // return $request;
 
         $product = Product::find($request->product_id);
-        $product->update(['name'=>$request->name, 'description'=>$request->description, 'quantity'=>$request->quantity, 'quantity_unit'=>$request->quantity_unit, 'amount'=>$request->amount, 'amount_unit'=>$request->amount_unit]);
+        $product->update(['name'=>$request->name, 'description'=>$request->description, 
+                        'quantity'=>$request->quantity, 'quantity_unit'=>$request->quantity_unit, 
+                        'amount'=>$request->amount, 'features'=>$request->features, 'category_id'=>$request->category_id, 'amount_unit'=>$request->amount_unit]);
         $product->save();
         if ($files=$request->file('file')) {
             foreach ($files as $file)
@@ -155,7 +163,7 @@ class ProductController extends Controller
     }
     public function front()
     {
-        $products = Product::with('images')->get();
+        $products = Product::with('images','category')->get();
         return response($products);
     }
     public function fetchProducts($name) {

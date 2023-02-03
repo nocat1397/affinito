@@ -106,6 +106,7 @@
 		                @endif
                     <thead style="background-color: #000; color: #c02626; border: 1px solid #c02626">
                       <th>Id</th>
+                      <th>Category</th>
                       <th>Name</th>
                       <th>Description</th>
                       <th>Quantity</th>
@@ -117,6 +118,7 @@
                       @foreach ($products as $product)
                       <tr>
                         <td>{{$product->id}}</td>
+                        <td>{{$product->category->name ?? '-'}}</td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->description}}</td>
                         <td>{{$product->quantity}} {{$product->quantity_unit}}</td>
@@ -131,96 +133,127 @@
                           </div>
                         </td>
                       </tr>
-                      <div class="modal fade" id="modal-{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header" style="background-color: #000; color: #c02626; border: 1px solid #c02626">
-                              <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Edit Product</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              {!! Form::open(['method'=>'POST','action'=>'ProductController@productChange','files'=>true]) !!}
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{$product->id}}">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Name</label>
-                                  <input type="text" class="form-control" name="name" value="{{$product->name}}">
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Description</label>
-                                  <textarea type="text" class="form-control" name="description" rows="3">{{$product->description}}</textarea>
-                                </div>
-                                <div class="form-row">
-                                  <div class="col-md-6 col-sm-6 col-lg-6 col-12">
-                                    <label>Quantity</label>
-                                    <div class="input-group">
-                                      <input type="number" class="form-control" name="quantity" value="{{$product->quantity}}">
-                                      <div class="input-group-append">
-                                        <select class="form-control" name="quantity_unit">
-                                          <option value="{{$product->quantity_unit}}">{{$product->quantity_unit}}</option>
-                                          <option value="kg">kg</option>
-                                          <option value="gram">gram</option>
-                                          <option value="ml">ml</option>
-                                          <option value="litter">litter</option>
-                                          <option value="piece">piece</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6 col-sm-6 col-lg-6 col-12">
-                                    <label>Amount</label>
-                                    <div class="input-group">
-                                      <input type="number" class="form-control" name="amount" aria-label="Text input with dropdown button" value="{{$product->amount}}">
-                                      <div class="input-group-append">
-                                        <select class="form-control" name="amount_unit">
-                                          <option value="{{$product->amount_unit}}">{{$product->amount_unit}}</option>
-                                          <option value="kg">kg</option>
-                                          <option value="gram">gram</option>
-                                          <option value="ml">ml</option>
-                                          <option value="litter">litter</option>
-                                          <option value="piece">piece</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                {{--  <div class="form-group mt-3">
-                                  <label>Tags</label>
-                                  <select class="form-control" name="tag">
-                                    <option value="">--Select Tag--</option>
-                                    <option value="{{$product->tag_id ?? ''}}" selected>{{$product->tag->name ?? ''}}</option>
-                                    @foreach ($tags as $tag)  
-                                      <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                    @endforeach
-                                  </select>
-                                </div>  --}}
-                                <div class="form-group">
-                                  <label>Images</label><br>
-                                  @foreach ($product->images as $image)
-                                  <div class="img-container">
-                                    <img src="/images/{{$image->file}}" height="120" width="120" class="image">
-                                    <div class="middle">
-                                        <a href="/delete-image/{{$product->id}}/{{$image->id}}" class="text btn btn-danger"><i class="fa fa-trash text-white" aria-hidden="true"></i></a>
-                                    </div>
-                                  </div>
-                                  @endforeach
-                                  <br>
-                                  <input type="file" name="file[]" multiple>
-                                </div>
-                                <div class="form-group text-center">
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                                {!! Form::close() !!}
-                            </div>
-                            
-                          </div>
-                        </div>
-                      </div>
+                      
                       @endforeach
                   </tbody>
                 </table>
+                @foreach ($products as $product)
+                <div class="modal fade" id="modal-{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" style="background-color: #000; color: #c02626; border: 1px solid #c02626">
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Edit Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="POST" action="/productUpdate" enctype="multipart/form-data">
+                          @csrf
+                          <input type="hidden" name="product_id" value="{{$product->id}}">
+                          <div class="form-group">
+                            <label>Categories</label>
+                            <select class="form-control" name="category_id">
+                              <option value="">--Select Category--</option>
+                              @foreach ($categories as $category)  
+                                <option @if($product->category !== null && $product->category->id == $category->id) selected @endif value="{{$category->id}}">{{$category->name}}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="text" class="form-control" name="name" value="{{$product->name}}">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Description</label>
+                            <textarea type="text" class="form-control" name="description" rows="3">{{$product->description}}</textarea>
+                          </div>
+                          <div class="form-row">
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-12">
+                              <label>Quantity</label>
+                              <div class="input-group">
+                                <input type="number" class="form-control" name="quantity" value="{{$product->quantity}}">
+                                <div class="input-group-append">
+                                  <select class="form-control" name="quantity_unit">
+                                    <option value="{{$product->quantity_unit}}">{{$product->quantity_unit}}</option>
+                                    <option value="kg">kg</option>
+                                    <option value="gram">gram</option>
+                                    <option value="ml">ml</option>
+                                    <option value="litter">litter</option>
+                                    <option value="piece">piece</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-12">
+                              <label>Amount</label>
+                              <div class="input-group">
+                                <input type="number" class="form-control" name="amount" aria-label="Text input with dropdown button" value="{{$product->amount}}">
+                                <div class="input-group-append">
+                                  <select class="form-control" name="amount_unit">
+                                    <option value="{{$product->amount_unit}}">{{$product->amount_unit}}</option>
+                                    <option value="kg">kg</option>
+                                    <option value="gram">gram</option>
+                                    <option value="ml">ml</option>
+                                    <option value="litter">litter</option>
+                                    <option value="piece">piece</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label>Images</label><br>
+                            @foreach ($product->images as $image)
+                            <div class="img-container">
+                              <img src="/images/{{$image->file}}" height="120" width="120" class="image">
+                              <div class="middle">
+                                  <a href="/delete-image/{{$product->id}}/{{$image->id}}" class="text btn btn-danger"><i class="fa fa-trash text-white" aria-hidden="true"></i></a>
+                              </div>
+                            </div>
+                            @endforeach
+                            <br>
+                            <input type="file" name="file[]" multiple>
+                          </div>
+                          <hr>
+                          <label for="">Features</label>
+                          <div id="features{{$product->id}}" class="form-group">
+                            @if( $product->features !== null)
+                            @foreach ($product->features as $feature)  
+                            <div class="form-group">
+                              <input type="text" name="features[]" class="form-control" placeholder="Type features or specifications" value="{{$feature}}">
+                            </div>
+                            @endforeach
+                            @else
+                            <div class="form-group">
+                              <input type="text" name="features[]" class="form-control" placeholder="Type features or specifications">
+                            </div>
+                            @endif
+                          </div>
+                          <div class="form-group">
+                            <a type="button" class="text-white btn btn-danger btn-sm shadow" id="removeFeature{{$product->id}}">Delete</a>
+                            <a type="button" class="text-white btn btn-success btn-sm shadow float-right" id="addFeature{{$product->id}}">Add</a>
+                          </div>
+                          <script>
+                            $('#addFeature{{$product->id}}').click(function(){
+                              $('#features{{$product->id}}').append('<div class="form-group"><input type="text" name="features[]" class="form-control" placeholder="Type features or specifications"></div>');
+                            });
+                            $('#removeFeature{{$product->id}}').click(function(){
+                              $('#features{{$product->id}}').children().last().remove();
+                            });
+                          </script>
+                          <hr>
+                          <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                @endforeach
                 </div>
               </div>
             </div>

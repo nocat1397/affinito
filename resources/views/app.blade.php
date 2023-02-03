@@ -166,6 +166,13 @@
     font-family: "FontAwesome";
     font-size: 35px;
 }
+@if(sizeof($banners))
+  @foreach($banners as $banner)
+    #banner{{$banner->id}} {
+      background-image:url('/images/banners/{{$banner->home}}');
+    }
+  @endforeach
+@endif
        </style>
 </head>
 <body>

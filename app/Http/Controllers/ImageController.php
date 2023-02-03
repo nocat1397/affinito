@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use App\Product;
+use App\HomeBanner;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -15,7 +16,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $banners = HomeBanner::all();
+        return response($banners);
     }
 
     /**
@@ -36,7 +38,16 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($files = $request->file('banners')) {
+            foreach ($files as $file) {
+                $name=$file->getClientOriginalName();
+                $file->move('images/banners/', $name);
+                $banner = new HomeBanner;
+                $banner->home = $name;
+                $banner->save();
+            }
+        }
+        return redirect()->back();
     }
 
     /**
@@ -45,9 +56,18 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $banners = HomeBanner::all();
+        return view('admin.banner.addBanner', compact('banners'));
+    }
+    public function bannerDelete($id)
+    {
+        $banner = HomeBanner::find($id);
+        $path = public_path().'/images/banners/'.$banner->home;
+        $delete = unlink($path);
+        $banner->delete();
+        return redirect()->back();
     }
 
     /**

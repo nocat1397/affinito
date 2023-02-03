@@ -240,7 +240,21 @@
                                         <li><router-link class="active" to="/">home</router-link>
                                            
                                         </li>
-
+                                        <li class="mega_items" v-if="categories.length > 0">
+                                            <a href="javascript:void(0)" type="button">Products<i class="fa fa-angle-down"></i></a>
+                                            <div class="mega_menu" v-if="categories.length > 0">
+                                                <ul class="mega_menu_inner row">
+                                                    <li class="menu-item-has-children col-md-3" v-for="category in categories" :key="category.index">
+                                                        <a href="javascript:void(0)" type="button" class="text-capitalize font-weight-bold">{{category.name}}</a>
+                                                        <ul v-if="category.products.length > 0">
+                                                            <li v-for="product in category.products" :key="product.index">
+                                                                <router-link :to="{name: 'Product-Details', params: { name: product.name}}">{{product.name}}</router-link>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
                                         <li><router-link to="/contact"> Contact Us</router-link></li>
                                     </ul>  
                                 </nav> 
@@ -254,7 +268,7 @@
     </header>
     <!--header area end-->
     <vue-page-transition name="fade-in-down">
-        <router-view>
+        <router-view :key="$route.fullPath">
         
         </router-view>
     </vue-page-transition>
@@ -391,7 +405,8 @@ export default {
             products:{},
             searchProducts:'',
             email:'',
-            amount:{}
+            amount:{},
+            categories:{}
         }
     },
     props: {
@@ -400,7 +415,8 @@ export default {
         wishlists:{},
         products:{},
         searchProducts:'',
-        amount:{}
+        amount:{},
+        categories:{}
 
     },
     watch: {
@@ -410,7 +426,8 @@ export default {
     },
     created() {
         this.fetchUser(),
-        this.fetchProducts()
+        this.fetchProducts(),
+        this.fetchCategory()
     },
     methods:{
        search(input) {
@@ -465,6 +482,13 @@ export default {
                                 console.log();
                             });
                     });
+                });
+            },
+            fetchCategory:function(){
+            this.axios.get('/api/category').then(response => {
+                  this.categories = response.data;
+                //   window.location.reload();
+                  console.log(response.data)
                 });
             },
             fetchProducts:function(){
