@@ -109,7 +109,8 @@
    }
    .autocomplete-input {
     border-radius: 20px!important;
-    width: 75%!important;
+    width: 100%!important;
+    background-color: #f7575730!important;
 
 }
 [data-position=below] .autocomplete-result-list {

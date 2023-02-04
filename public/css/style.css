@@ -2130,7 +2130,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 @media only screen and (max-width: 767px) {
   .offcanvas_two .canvas_open a {
-    color: #fff;
+    color: #222222;
     border: 1px solid #fff;
   }
   .offcanvas_two .canvas_open a:hover {
@@ -2154,7 +2154,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .header_middle2 {
-  background: #000;
+  background: #fff;
+  color: #000!important;
   /* background: url('/img/nav.jpg'); */
   /* background-size: cover; */
   padding: 18px 0 18px;
@@ -2241,16 +2242,16 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #222222;
 }
 .header_middle2 .header_account_list.register ul li a {
-  color: #fff;
+  color: #000;
 }
 .header_middle2 .header_account_list.register ul li a:hover {
   color: #c02626;
 }
 .header_middle2 .header_account_list.register ul li span {
-  color: #fff;
+  color: #000;
 }
 .header_middle2 .header_account_list > a {
-  color: #fff;
+  color: #000;
 }
 .header_middle2 .header_account_list > a:hover {
   color: #c02626;
@@ -2585,7 +2586,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
-  height: 714px;
+  height: 545px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* .single_slider {

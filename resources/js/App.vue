@@ -39,36 +39,48 @@
                         </div>
                         <div class="text-center mt-3">
                             <ul v-if="!userDetails" class="d-inline-flex">
-                                <li><router-link to="/Register">Register</router-link></li>
+                                <li><router-link v-on:click.native="canvasClose" to="/Register">Register</router-link></li>
                                 <li><span>/</span></li>
-                                <li><router-link to="/Login">Login</router-link></li>
+                                <li><router-link v-on:click.native="canvasClose" to="/Login">Login</router-link></li>
                             </ul>
                         </div>
 
 
                         <div id="menu" class="text-left">
                             <ul class="offcanvas_main_menu">
-                                <li class="menu-item-has-children active" v-if="userDetails">
-                                    <router-link to="/" style="line-height: unset; color: #c02626; font-weight: bold; font-size: 15px">{{userDetails.name}}</router-link>
+
+                                <li class="active" v-if="userDetails">
+                                    <router-link v-on:click.native="canvasClose" to="/" style="line-height: unset; color: #c02626; font-weight: bold; font-size: 15px">{{userDetails.name}}</router-link>
                                 </li>   
-                                <li class="menu-item-has-children">
-                                    <router-link to="/">Home</router-link>
+                                <li class="active">
+                                    <router-link v-on:click.native="canvasClose" to="/">Home</router-link>
                                 </li>
-                                <!-- <li class="menu-item-has-children" v-if="userDetails">        
-                                    <router-link :to="{name: 'wallet', params: { id: userDetails.id}}">Wallet</router-link>
-                                </li> -->
-                                <li class="menu-item-has-children" v-if="userDetails">        
-                                    <router-link :to="{name: 'orders', params: { id: userDetails.id}}">Your Orders</router-link>
+                                <li class="menu-item-has-children" v-if="categories.length > 0"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
+                                    <a href="#">Shop Now</a>
+                                    <ul class="sub-menu">
+                                        <li class="menu-item-has-children" v-for="category in categories" :key="category.index"><span class="menu-expand"><i class="fa fa-angle-down"></i></span>
+                                            <a href="#">{{category.name}}</a>
+                                            <ul class="sub-menu" v-if="category.products.length > 0">
+                                                <li v-for="product in category.products" :key="product.index">
+                                                    <router-link v-on:click.native="canvasClose" :to="{name: 'Product-Details', params: { name: product.name}}">{{product.name}}</router-link>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
                                 </li>
-                                <li class="menu-item-has-children" v-if="userDetails">
-                                    <a @click.prevent="logout">Logout</a>
+                                <li class="" v-if="userDetails">        
+                                    <router-link v-on:click.native="canvasClose" :to="{name: 'orders', params: { id: userDetails.id}}">Your Orders</router-link>
+                                </li>
+                                <li class="" v-if="userDetails">
+                                    <a v-on:click="canvasClose" @click.prevent="logout">Logout</a>
                                 </li>
 
                                 <!-- <li class="menu-item-has-children">
                                     <a href="about.html">about Us</a>
                                 </li> -->
-                                <li class="menu-item-has-children">
-                                    <router-link to="/contact"> Contact Us</router-link> 
+                                <li class="">
+                                    <router-link v-on:click.native="canvasClose" to="/contact"> Contact Us</router-link> 
                                 </li>
                             </ul>
                         </div>
@@ -88,31 +100,14 @@
     
     <header>
         <div class="main_header header_two">
-            <div class="header_top">
-                <div class="container">
-                    <div class="row align-items-center">
-                       
-                        <div class="col-lg-12">
-                            <div class="header_social text-right">
-                                <ul>
-                                    <!-- <li><a href="#"><i class="ion-social-twitter"></i></a></li> -->
-                                    <!-- <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li> -->
-                                    <!-- <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li> -->
-                                    <li><a href="https://www.facebook.com/pg/QuickNutri/posts/" target="_blank"><i class="ion-social-facebook"></i></a></li>
-                                    <li><a href="https://www.instagram.com/nutriquickin/" target="_blank"><i class="ion-social-instagram-outline"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- <div style="position: absolute; top: 29px; transform: rotate(180deg);">
                 <img src="/img/slider/bg-top2.png" class="wave-top">
             </div> -->
-            <div class="header_middle header_middle2">
+            <div class="header_middle header_middle2 sticky-header">
                 <div class="container">
                     <div class="row align-items-center">
-                       <div class="col-lg-4 col_search">
+                       <!-- <div class="col-lg-4 col_search">
                             <autocomplete
                               :search="search"
                               placeholder="Search Products"
@@ -120,19 +115,48 @@
                               @submit="handleSubmit"
                               class="mobail_s_none"
                             ></autocomplete>
-                           <!-- <div class="search_container mobail_s_none">
-                                <form action="#">
-                                    <div class="search_box">
-                                        <input placeholder="Search here..." type="text" v-model="search">
-                                         <button type="submit"><span class="lnr lnr-magnifier"></span></button>
-                                    </div>
-                                </form>
-                             
-                            </div> -->
-                       </div>
-                        <div class="col-lg-4 col-md-3 col-sm-3 col-3">
+                          
+                       </div> -->
+                        <div class="col-lg-2 col-md-3 col-sm-2 col-3">
                             <div class="logo">
                                 <router-link to="/"><img src="/img/logo/logo.png" alt=""></router-link>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-3 col-sm-3 col-1">
+
+                            <div class="main_menu  menu_two color_two menu_position"> 
+                                <nav>  
+                                    <ul>
+                                        <li><router-link class="active" to="/">home</router-link>
+                                           
+                                        </li>
+                                        <li class="mega_items" v-if="categories.length > 0">
+                                            <a href="javascript:void(0)" type="button">Shop now<i class="fa fa-angle-down"></i></a>
+                                            <div class="mega_menu" v-if="categories.length > 0">
+                                                <div class="mb-3">
+                                                    <autocomplete
+                                                    :search="search"
+                                                    placeholder="Search Products"
+                                                    :get-result-value="getResultValue"
+                                                    @submit="handleSubmit"
+                                                    class="mobail_s_none"
+                                                    ></autocomplete>
+                                                </div>
+                                                <ul class="mega_menu_inner row">
+                                                    <li class="menu-item-has-children col-md-4" v-for="category in categories" :key="category.index">
+                                                        <a href="javascript:void(0)" type="button" class="text-capitalize font-weight-bold">{{category.name}}</a>
+                                                        <ul v-if="category.products.length > 0">
+                                                            <li v-for="product in category.products" :key="product.index">
+                                                                <router-link :to="{name: 'Product-Details', params: { name: product.name}}">{{product.name}}</router-link>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li><router-link to="/contact"> Contact Us</router-link></li>
+                                    </ul>  
+                                </nav> 
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-7 col-8">
@@ -164,76 +188,18 @@
                                 <div class="header_account_list  mini_cart_wrapper">
                                    <router-link to="/login" v-if="!userDetails"><span class="lnr lnr-cart"></span><span class="item_count">{{carts.length}}</span></router-link>
                                    <router-link v-if="userDetails" :to="{name: 'cart', params: { id: userDetails.id}}"><span class="lnr lnr-cart"></span><span class="item_count">{{carts.length}}</span></router-link>
-                                    <!--mini cart-->
-                                    <!-- <div class="mini_cart">
-                                        <div class="cart_gallery">
-                                            <div class="cart_close">
-												<div class="cart_text">
-													<h3>cart</h3>
-												</div>
-												<div class="mini_cart_close">
-													<a href="javascript:void(0)"><i class="icon-x"></i></a>
-												</div>
-											</div>
-                                            <div class="cart_item">
-                                               <div class="cart_img">
-                                                   <a href="#"><img src="/img/s-product/product.jpg" alt=""></a>
-                                               </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Primis In Faucibus</a>
-                                                    <p>1 x <span> $65.00 </span></p>    
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="icon-x"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cart_item">
-                                               <div class="cart_img">
-                                                   <a href="#"><img src="/img/s-product/product2.jpg" alt=""></a>
-                                               </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Letraset Sheets</a>
-                                                    <p>1 x <span> $60.00 </span></p>    
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="icon-x"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mini_cart_table">
-                                            <div class="cart_table_border">
-                                                <div class="cart_total">
-                                                    <span>Sub total:</span>
-                                                    <span class="price">$125.00</span>
-                                                </div>
-                                                <div class="cart_total mt-10">
-                                                    <span>total:</span>
-                                                    <span class="price">$125.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mini_cart_footer">
-                                           <div class="cart_button">
-                                                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-                                            </div>
-                                            <div class="cart_button">
-                                                <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-                                            </div>
-
-                                        </div>
-                                    </div> -->
-                                    <!--mini cart end-->
+                                    
                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="header_bottom sticky-header">
+            <!-- <div class="header_bottom">
                 <div class="container">  
                     <div class="row align-items-center">
                         <div class="col-lg-8 offset-lg-2">
-                            <!--main menu start-->
+                            
                             <div class="main_menu  menu_two color_two menu_position"> 
                                 <nav>  
                                     <ul>
@@ -241,7 +207,7 @@
                                            
                                         </li>
                                         <li class="mega_items" v-if="categories.length > 0">
-                                            <a href="javascript:void(0)" type="button">Products<i class="fa fa-angle-down"></i></a>
+                                            <a href="javascript:void(0)" type="button">Shop now<i class="fa fa-angle-down"></i></a>
                                             <div class="mega_menu" v-if="categories.length > 0">
                                                 <ul class="mega_menu_inner row">
                                                     <li class="menu-item-has-children col-md-3" v-for="category in categories" :key="category.index">
@@ -259,11 +225,11 @@
                                     </ul>  
                                 </nav> 
                             </div>
-                            <!--main menu end-->
+                         
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div> 
     </header>
     <!--header area end-->
@@ -530,6 +496,30 @@ export default {
 
             canvasOpen(){
                 $('.offcanvas_menu_wrapper,.off_canvars_overlay').addClass('active')
+                /*---Off Canvas Menu---*/
+            var $offcanvasNav = $('.offcanvas_main_menu'),
+                $offcanvasNavSubMenu = $offcanvasNav.find('.sub-menu');
+            $offcanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="fa fa-angle-down"></i></span>');
+
+            $offcanvasNavSubMenu.slideUp();
+
+            $offcanvasNav.on('click', 'li a, li .menu-expand', function(e) {
+                var $this = $(this);
+                if ( ($this.parent().attr('class').match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/)) && ($this.attr('href') === '#' || $this.hasClass('menu-expand')) ) {
+                    e.preventDefault();
+                    if ($this.siblings('ul:visible').length){
+                        $this.siblings('ul').slideUp('slow');
+                    }else {
+                        $this.closest('li').siblings('li').find('ul:visible').slideUp('slow');
+                        $this.siblings('ul').slideDown('slow');
+                    }
+                }
+                if( $this.is('a') || $this.is('span') || $this.attr('clas').match(/\b(menu-expand)\b/) ){
+                	$this.parent().toggleClass('menu-open');
+                }else if( $this.is('li') && $this.attr('class').match(/\b('menu-item-has-children')\b/) ){
+                	$this.toggleClass('menu-open');
+                }
+            });
             },
             canvasClose(){
                 $('.offcanvas_menu_wrapper,.off_canvars_overlay').removeClass('active')
@@ -588,7 +578,7 @@ export default {
         mounted: function () {
           window.setInterval(() => {
             this.fetchUser()
-          }, 3000)
+          }, 3000);
         }
 }
 </script>

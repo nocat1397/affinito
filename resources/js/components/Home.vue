@@ -45,7 +45,7 @@
                     <div class="tab-pane allCat show fade active" role="tabpanel">
                         <div class="row">
 
-                            <article class="col-md-4 product_carousel product_column5" v-for="product in filteredList" :key="product">
+                            <article class="col-md-4 col-6 product_carousel product_column5" v-for="product in filteredList" :key="product">
                                 <figure class="single_product">
                             <div class="product_thumb"> 
                                 <router-link  class="primary_img" :to="{name: 'Product-Details', params: { name: product.name}}"><img :src="'/images/'+product.images[0].file" alt=""></router-link>
@@ -95,7 +95,7 @@
                     <div :class="'tab-pane category'+category.id" v-for="category in categories" :key="category.id" v-if="categories.length > 0" role="tabpanel">
                         <div class="row">
 
-                            <article class="col-md-4 product_carousel product_column5" v-for="product in filteredList" :key="product" v-if="product.category_id == category.id">
+                            <article class="col-md-4 col-6 product_carousel product_column5" v-for="product in filteredList" :key="product" v-if="product.category_id == category.id">
                                 <figure class="single_product">
                             <div class="product_thumb"> 
                                 <router-link  class="primary_img" :to="{name: 'Product-Details', params: { name: product.name}}"><img :src="'/images/'+product.images[0].file" alt=""></router-link>
