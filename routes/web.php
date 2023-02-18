@@ -27,7 +27,8 @@ Route::domain(env('DOMAIN'))->group(function () {
 Route::domain(env('DOMAIN2'))->group(function () {
     Route::get('/user', 'UserController@details');
     Route::get('{any}', function () {
-        return view('app');
+        $banners = HomeBanner::all();
+        return view('app',compact('banners'));
     })->where('any', '.*');
     Auth::routes();
     Route::post('/registerUser', 'UserController@user');
