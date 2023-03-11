@@ -130,6 +130,9 @@
    .owl-theme .owl-nav .owl-prev, .owl-theme .owl-nav .owl-next {
      visibility: hidden;
    }
+   .owl-theme .owl-nav [class*='owl-']{
+    visibility: hidden!important;
+   }
   .owl-theme .owl-nav .owl-prev:after {
     visibility: visible;
     content: "\f0a9";

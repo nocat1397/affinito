@@ -104,6 +104,24 @@
             <!-- <div style="position: absolute; top: 29px; transform: rotate(180deg);">
                 <img src="/img/slider/bg-top2.png" class="wave-top">
             </div> -->
+            <div  class="header_top">
+                <div  class="container">
+                    <div  class="row align-items-center">
+                        <div class="text-center text-light col-lg-12">
+                            <h5 class="top-head">FREE SHIPPING ON ORDERS 500/- +</h5>
+                            <!-- <div  class="header_social text-right">
+                                <ul >
+                                    <li >
+                                        <a  href="https://www.facebook.com/pg/QuickNutri/posts/" target="_blank"><i  class="ion-social-facebook"></i></a>
+                                    </li> 
+                                    <li >
+                                        <a  href="https://www.instagram.com/nutriquickin/" target="_blank"><i  class="ion-social-instagram-outline"></i></a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="header_middle header_middle2 sticky-header">
                 <div class="container">
                     <div class="row align-items-center">
@@ -122,7 +140,7 @@
                                 <router-link to="/"><img src="/img/logo/logo.png" alt=""></router-link>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-3 col-sm-3 col-1">
+                        <div class="col-lg-7 col-md-3 col-sm-3 col-1">
 
                             <div class="main_menu  menu_two color_two menu_position"> 
                                 <nav>  
@@ -159,16 +177,22 @@
                                 </nav> 
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-7 col-8">
+                        <div class="col-lg-3 col-md-6 col-sm-7 col-8">
                             <div class="header_account_area">
-                                <div class="header_account_list register main_menu">
-                                    <nav>
+                                <div class="header_account_list register main_menu col_search">
+                                        <nav>
+                                            <span style="font-size: 25px;" class="lnr lnr-magnifier"></span>
+                                        </nav>
 
-                                    <ul v-if="userDetails">
-                                        <li>
-                                            <router-link to="/" style="line-height: unset">{{userDetails.name}}<i class="fa fa-angle-down"></i></router-link>
-                                            <ul class="sub_menu">
-                                                <li style="display: block!important"><router-link :to="{name: 'orders', params: { id: userDetails.id}}" class="text-dark">Your Orders</router-link></li>
+                                    </div>
+                                <div class="header_account_list register main_menu">
+                                    
+                                    <nav>
+                                        <ul v-if="userDetails">
+                                            <li>
+                                                <router-link to="/" style="line-height: unset">{{userDetails.name}}<i class="fa fa-angle-down"></i></router-link>
+                                                <ul class="sub_menu">
+                                                    <li style="display: block!important"><router-link :to="{name: 'orders', params: { id: userDetails.id}}" class="text-dark">Your Orders</router-link></li>
                                                 <!-- <li style="display: block!important"><router-link :to="{name: 'wallet', params: { id: userDetails.id}}" class="text-dark">Wallet</router-link></li> -->
                                                 <li style="display: block!important"><a  @click.prevent="logout" class="text-dark">Logout</a></li>
                                             </ul>
@@ -176,9 +200,9 @@
                                     </ul>
                                     </nav>
                                     <ul v-if="!userDetails">
-                                        <li><router-link to="/Register">Register</router-link></li>
-                                        <li><span>/</span></li>
-                                        <li><router-link to="/Login">Login</router-link></li>
+                                        <!-- <li><router-link to="/Register">Register</router-link></li> -->
+                                        <li><span style="font-size: 23px;" class="lnr lnr-user"></span></li>
+                                        <!-- <li><router-link to="/Login">Login</router-link></li> -->
                                     </ul>
                                 </div>
                                 <div class="header_account_list header_wishlist">
@@ -240,35 +264,86 @@
     </vue-page-transition>
 
         <!--footer area start-->
-    <footer class="footer_widgets color_two">
-        <div class="footer_top">
+    <footer class="footer_widgets color_two mt-5">
+        <div class="footer_top text-center">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-7">
-                        <div class="widgets_container contact_us">
-                           <div class="footer_logo">
-                               <router-link to="/"><img src="/img/logo/logo.png" alt=""></router-link>
-                           </div>
-                           <!-- <p class="footer_desc"><span class="text-uppercase bg-orange p-1 text-white">affinito organic products private limited</span><br>Namaste! We are Organic products supplier.</p> -->
-                            <p><span>Address:</span> 1803/4, VU Nagar, Phase -IV, GIDC Estate, Anand, Gujarat 388121.</p>
-                            <p><span>Email:</span> <a href="mailto:nutriquickfoods@gmail.com">nutriquickfoods@gmail.com</a></p>
-                            <p><span>Call us:</span> <a href="tel:8877224416">+91 8877224416,+91 9537886644,+91 9624365544</a> </p>
-                        </div>          
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="col-lg-2 col-md-12 col-sm-7">
                         <div class="widgets_container widget_menu">
-                            <h3>Information</h3>
+                            <h3>Shop</h3>
                             <div class="footer_menu">
                             
                                 <ul>
-                                    <!-- <li><a href="">About Us</a></li> -->
-                                    <!-- <li><router-link :to="{name: 'orders', params: { id: userDetails.id}}">Deli very Information</router-link></li> -->
-                                    <li><router-link to="/policy"> Privacy Policy</router-link></li>
-                                    <li><router-link to="/refund"> Refund Policy</router-link></li>
-                                    <li><router-link to="/terms"> Terms & Conditions</router-link></li>
-                                    <li><router-link to="/contact"> Contact Us</router-link></li>
-                                    <!-- <li><a href="#"> Site Map</a></li> -->
+                                    <li><router-link to="/policy"> Fruit Bites</router-link></li>
+                                    <li><router-link to="/policy"> Fruit Powder</router-link></li>
+                                    <li><router-link to="/policy"> Chocolates</router-link></li>
+                                    <!-- <li><router-link to="/policy"> Veggies</router-link></li>
+                                    <li><router-link to="/policy"> Cheeses</router-link></li>
+                                    <li><router-link to="/policy"> Bulk</router-link></li> -->
+                                 
                                 </ul>
+                            </div>
+                        </div>
+                        <!-- <div class="widgets_container contact_us">
+                           <div class="footer_logo">
+                               <router-link to="/"><img src="/img/logo/logo.png" alt=""></router-link>
+                           </div>
+                            <p><span>Address:</span> 1803/4, VU Nagar, Phase -IV, GIDC Estate, Anand, Gujarat 388121.</p>
+                            <p><span>Email:</span> <a href="mailto:nutriquickfoods@gmail.com">nutriquickfoods@gmail.com</a></p>
+                            <p><span>Call us:</span> <a href="tel:8877224416">+91 8877224416,+91 9537886644,+91 9624365544</a> </p>
+                        </div>           -->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-5">
+                        <div class="widgets_container widget_menu">
+                            <h3>About</h3>
+                            <div class="footer_menu">
+                            
+                                <ul>
+                                    <li><router-link to="/policy"> Why Freeze-Dried</router-link></li>
+                                    <li><router-link to="/policy"> Our Story</router-link></li>
+                                    <li><router-link to="/policy"> Recipes</router-link></li>
+                                    <li><router-link to="/policy"> Blog</router-link></li>
+                                    <li><router-link to="/policy"> Newsletter</router-link></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-5">
+                        <div class="widgets_container widget_menu">
+                            <h3>Info</h3>
+                            <div class="footer_menu">
+                            
+                                <ul>
+                                    <li><router-link to="/policy"> FAQs</router-link></li>
+                                    <li><router-link to="/policy"> Contact Us</router-link></li>
+                                    <li><router-link to="/policy"> Refund Policy</router-link></li>
+                                    <li><router-link to="/policy"> Shipping & Returns</router-link></li>
+                                    <li><router-link to="/policy"> Become a Dealer</router-link></li>
+                                    <li><router-link to="/policy"> Terms of Service</router-link></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-3 col-sm-5">
+                        <div class="widgets_container widget_menu">
+                           
+                            <div class="footer_menu copyright">
+                            
+                                <ul>
+                                    <!-- <li>© {{new Date().getFullYear()}}  <router-link to="/">Affinito</router-link>  . All Rights Reserved</li> -->
+                                    <li>©{{new Date().getFullYear()}} Affinito. All rights reserved</li>
+                                    <!-- <li><a href="#"><i class="ion-social-facebook"></i></a> <a href="#"><i class="ion-social-instagram-outline"></i></a></li> -->
+                                
+                                </ul>
+                                <div class="header_social">
+                            <ul>
+                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion-social-googleplus-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                            </ul>
+                        </div>
                             </div>
                         </div>
                     </div>
@@ -287,29 +362,12 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                        <div class="widgets_container widget_newsletter">
-                            <h3>Sign up newsletter</h3>
-                            <p class="footer_desc">Get updates by subscribe our weekly newsletter</p>
-                            <div class="subscribe_form">
-                                <form id="mc-form" class="mc-form footer-newsletter" @submit.prevent="addNewsletter">
-                                    <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" v-model="email"/>
-                                    <button id="mc-submit" type="submit">Subscribe</button>
-                                </form>
-                                <!-- mailchimp-alerts Start -->
-                                <div class="mailchimp-alerts text-centre">
-                                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                </div><!-- mailchimp-alerts end -->
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
        
-        <div class="footer_bottom ">
+        <!-- <div class="footer_bottom ">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-7">
@@ -320,16 +378,14 @@
                     <div class="col-lg-6 col-md-5">    
                         <div class="footer_payment">
                             <ul>
-                                <!-- <li><a href="#"><img src="/img/icon/paypal1.jpg" alt=""></a></li> -->
                                 <li><a href=""><img src="/img/icon/paypal2.jpg" alt=""></a></li>
-                                <!-- <li><a href="#"><img src="/img/icon/paypal3.jpg" alt=""></a></li> -->
                                 <li><a href=""><img src="/img/icon/paypal4.jpg" alt=""></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>   -->
          <!-- <footer class="footer-bottom fixed-bottom d-md-none d-lg-none" v-if="carts.length !== 0" id="showPlaceorder"> -->
          <!-- <footer class="footer-bottom fixed-bottom d-md-none d-lg-none" id="showPlaceorder" v-on:click="checkCart();">
            

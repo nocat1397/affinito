@@ -14,7 +14,8 @@
     <!--product area start-->
         <div class="product_area color_two  mb-60"  id="products">
         <div class="container">
-            <div class="row">
+          
+            <!-- <div class="row">
                 <div class="col-12">
                     <div class="product_header" v-if="categories.length > 0">
                         <div class="section_title">
@@ -38,14 +39,15 @@
                         
                     </div>
                 </div>
-            </div> 
-            <div class="product_container">  
-                <div class="tab-content">
-
-                    <div class="tab-pane allCat show fade active" role="tabpanel">
-                        <div class="row">
-
-                            <article class="col-md-4 col-6 product_carousel product_column5" v-for="product in filteredList" :key="product">
+            </div>  -->
+            <div class="product_container ">  
+                <div class="section_title">
+                           <!-- <p>Best Sellers</p> -->
+                           <h1>Best Sellers</h1>
+                        </div>
+                <div v-if="filteredList.length > 0">
+                            <carousel class=" product_carousel product_column5" :responsive="{0:{items:1,autoplay:false,nav:false,loop:false,dots:false},600:{items:3,autoplay:false,nav:true,loop:false,dots:false,margin:20},1000:{items:3,autoplay:false,nav:true,loop:false,dots:false,margin:20}}">
+                            <article v-for="product in filteredList" :key="product">
                                 <figure class="single_product">
                             <div class="product_thumb"> 
                                 <router-link  class="primary_img" :to="{name: 'Product-Details', params: { name: product.name}}"><img :src="'/images/'+product.images[0].file" alt=""></router-link>
@@ -89,68 +91,67 @@
                             </figcaption>
                         </figure>
                     </article>
-                </div>
+                </carousel>
+               </div>
                     
-                </div>
-                    <div :class="'tab-pane category'+category.id" v-for="category in categories" :key="category.id" v-if="categories.length > 0" role="tabpanel">
-                        <div class="row">
-
-                            <article class="col-md-4 col-6 product_carousel product_column5" v-for="product in filteredList" :key="product" v-if="product.category_id == category.id">
-                                <figure class="single_product">
-                            <div class="product_thumb"> 
-                                <router-link  class="primary_img" :to="{name: 'Product-Details', params: { name: product.name}}"><img :src="'/images/'+product.images[0].file" alt=""></router-link>
-                                <div class="label_product">
-                                    <!-- <span class="label_sale">Sale</span> -->
-                                    <!-- <span class="label_new">New</span> -->
-                                </div>
-                                <div class="" v-if="product.quantity < 6" style="background: red; color:#fff">
-                                    <p class="text-center">Out of Stock</p>
-                                </div>
-                                <div class="action_links" v-if="product.quantity > 5">
-                                    <ul>
-                                        <li class="add_to_cart" v-if="!userDetails"><router-link :to="{name: 'Product-Details', params: { name: product.name}}" title="Add to Wishlist"><span class="lnr lnr-eye"></span></router-link></li>
-                                        <li class="add_to_cart" v-if="!userDetails"><router-link to="/login" title="Add to Wishlist"><span class="lnr lnr-heart"></span></router-link></li>
-                                        <li class="wishlist" v-if="userDetails"><button class="btn" v-on:click="addToWishlist(product.id)" title="Add to Wishlist"><span class="lnr lnr-heart"></span></button></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content">
-                                <h4 class="product_name"><router-link :to="{name: 'Product-Details', params: { name: product.name}}">{{product.name.replace(/-/g," ")}}</router-link></h4>
-                                <!-- <p><router-link to="#">Fruits</router-link></p> -->
-                                <div class="price_box"> 
-                                    <span class="current_price">₹ {{product.amount}}/-</span>
-                                </div>
-                                <div class="price_box">
-                                    <span v-if="product.quantity > 5" class="">
-                                        
-                                        <div class="quantity">
-                                            <form class="productToCart">  
-                                                <input type="hidden" name="product_id" :value="product.id">
-                                                <input type="hidden" name="user_id" :value="userDetails.id">
-                                                <a class="minus" id="minus" type="button">-</a>
-                                                <input type="text" class="form-control qty" name="qty" v-model="quantity">
-                                                <a class="plus" type="button" id="plus">+</a>
-                                                <button class="btn btn-orange" id="add" v-if="userDetails" type="button">Add</button>
-                                                <router-link v-if="!userDetails" class="btn btn-orange" to="/login">Add</router-link>
-                                            </form>
-                                        </div>
-                                    </span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                    
-                </div>
-            </div>
+                
             </div>   
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="product_header" v-if="categories.length > 0">
+                        <div class="section_title">
+                           <p>Shop By Categories</p>
+                           <h1>Categories</h1>
+                        </div>
+                    </div>
+                        
+                    </div> 
+                        <div class="col-md-4 mb-3" v-for="category in categories" :key="category.id">
+                            <div class="card shadow p-3 card-new1">
+                                <div class="card-head pt-2 pb-2 text-center">
+                               <h2 style="font-weight: 600;"> {{category.name}}</h2>
+                            </div>
+                            <div class="card-body text-center pb-2">
+                                <img :src="'/category/'+category.file" style="width:auto; height: 37vh;" alt="">
+                                <a href="#" class="w-50 mt-3 btn btn-orange">Shop Now</a>
+                            </div>
+                            </div>
+
+                        </div>
+                        <!-- <div class="col-md-4 mb-3">
+                            <div class="card shadow p-3 card-new">
+                                <div class="card-head pt-2 pb-2 text-center">
+                               <h2 style="font-weight: 600;">Fruit Powders</h2>
+                            </div>
+                            <div class="card-body text-center pb-2">
+                                <img src="/img/bg/product-img/3.jpg" style="width:auto; height: 37vh;" alt="">
+                                <a href="#" class="w-50 mt-3 btn btn-orange">Shop Now</a>
+                            </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow p-3 card-new">
+                                <div class="card-head pt-2 pb-2 text-center">
+                               <h2 style="font-weight: 600;">Chocolates</h2>
+                            </div>
+                            <div class="card-body text-center pb-2">
+                                <img src="/img/bg/product-img/img3.jpg" style="width:auto; height: 37vh;" alt="">
+                                <a href="#" class="w-50 mt-3 btn btn-orange">Shop Now</a>
+                            </div>
+                            </div>
+
+                        
+                    </div> -->
+           </div>
         </div> 
     </div>
    
     <!--product area end-->
 
     <!--banner area start-->
-    <div class="banner_area banner_gallery2">
+    <!-- <div class="banner_area banner_gallery2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4">
@@ -179,23 +180,45 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--banner area end-->
     
     <!--banner fullwidth area satrt-->
-    <div class="banner_fullwidth color_two mb-5">
+    <!-- <div class="banner_fullwidth color_two mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="banner_full_content text-center">
-                        <!-- <p>Stay Healthy & Fit !</p> -->
-                        <!-- <h2>50% OFf <span>on all quality products</span></h2> -->
+                       
                         <router-link to="/">discover now</router-link>
                     </div>
                 </div>
             </div>
         </div>
       
+    </div> -->
+
+    <div class="newsletter">
+        <div class="">
+            <div class="row">
+              <div class="subscribenews">
+                <h1 class="discount_size">Take 15% OFF Your First Purchase</h1>
+                <div class="subscribe_form sub_form m-auto mt-4">
+                    <form id="mc-form" class="mc-form text-light footer-newsletter" @submit.prevent="addNewsletter">
+                        <input id="mc-email" class="text-light" type="email" autocomplete="off" placeholder="Enter your email" v-model="email"/>
+                        <button id="mc-submit" type="submit">Subscribe</button>
+                    </form>
+                    <!-- mailchimp-alerts Start -->
+                    <div class="mailchimp-alerts text-centre">
+                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                    </div><!-- mailchimp-alerts end -->
+                </div>
+              </div>
+            </div>
+        </div>
+
     </div>
     <!--banner fullwidth area end-->
 

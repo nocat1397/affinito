@@ -445,6 +445,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   .offcanvas_menu {
     display: block;
   }
+  
+  
 }
 @media only screen and (max-width: 767px) {
   .offcanvas_menu {
@@ -669,7 +671,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .header_top {
-  border-bottom: 1px solid #ededed;
+  /* border-bottom: 1px solid #ededed; */
+  background: #c02626;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header_top {
@@ -3078,7 +3081,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   .banner_fullwidth {
     padding: 35px 0;
     margin-bottom: 54px;
-    background-position-x: -99px;
+    /* background-position-x: -99px; */
   }
 }
 
@@ -5426,11 +5429,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .widgets_container h3 {
-  font-size: 17px;
+  font-size: 22px;
   line-height: 18px;
   margin-bottom: 20px;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: 600;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .widgets_container h3 {
@@ -11588,3 +11591,57 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: aliceblue;
 
 }
+.top-head{
+  margin-bottom: 0;
+  padding: 10px;
+  font-weight: 500;
+}
+.subscribenews{
+    padding: calc(0.625rem + 7.375vw);
+    text-align: center;
+    color: #fff;
+}
+.newsletter{
+  height: 50vh;
+  background-color: #c02626;
+  width: 95%;
+  border-radius: 13px;
+  margin: auto;
+}
+.discount_size{
+  font-size: 60px;
+}
+.sub_form{
+  width: 40%;
+}
+@media screen and (max-width: 991px) {
+  .newsletter{
+    height: auto;
+  }
+  .discount_size{
+    font-size: 49px;
+  }
+  .sub_form{
+    width: auto;
+  }
+  .widgets_container{
+    text-align: left!important;
+  }
+  .copyright{
+    text-align: center;
+  }
+}
+
+.card-new1:first-of-type{
+  border: 5px solid #8ac13e;
+  border-radius: 10px;
+}
+
+.card-new1:last-of-type {
+  border: 5px solid #f08800;
+  border-radius: 10px;
+}
+/* .card-new1 {
+  border: 5px solid #f2c921;
+  border-radius: 10px;
+} */
